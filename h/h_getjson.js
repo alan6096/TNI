@@ -1,10 +1,10 @@
-	function getjsonvalue(param1,param2)
+	function getjsonvalue(param1,param2,jointable)
     {
 //alert(param1);
 		var myarray = param1.split("&");//split to array by &
 		var temp = myarray[2].split("=");//split tb_field=val1 ege:temp[0]=tb_field & temp[1]=val1
-		var fieldname = temp[1].split(",");//split val1 by , 
-
+		var fieldname = temp[1].split(",");//split val1 by ,
+		
 	  	$.getJSON("h/h_read_json.php?"+param1, function(data) 
 		{
 			for(x in fieldname)
@@ -22,14 +22,16 @@
  		});
     }
     
-    function getjsontext(param1,param2)
+    function getjsontext(param1,param2,jointable)
     {
-//alert(param1);
 		var myarray = param1.split("&");//split to array by &
 		var temp = myarray[2].split("=");//split tb_field=val1 ege:temp[0]=tb_field & temp[1]=val1
 		var fieldname = temp[1].split(",");//split val1 by , 
 
-	  	$.getJSON("h/h_read_json.php?"+param1, function(data) 
+		var joinarray = jointable.split(",")
+		//alert(joinarray[0]);
+		
+	  	$.getJSON("h/h_read_json.php?"+param1,{join:joinarray}, function(data) 
 		{
 			for(x in fieldname)
 			{
