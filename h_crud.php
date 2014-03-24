@@ -182,6 +182,7 @@ function advanceform($form_id,$input_field,$label_field,$extra_field)
 		
     if($input_field)
     {
+        $temp .= "<table>";
     	for ($x=0; $x < count($input_id_new); $x++) 
     	{ 
 			$key = $input_id_new[$x][0];
@@ -190,14 +191,15 @@ function advanceform($form_id,$input_field,$label_field,$extra_field)
 			
 			if($input_id_new[$x][1]=="")
 			{
-				$temp = $temp . '<label for="'.$key.'" class="dialog_label">'.$label_txt[$x].' : </label><INPUT type="'.$type.'" class="dialog_input" NAME="'.$key.'" id="'.$key.'" TYPE="text"><br>';
+				$temp = $temp . '<tr><td><label for="'.$key.'" class="dialog_label">'.$label_txt[$x].' : </label></td><td><INPUT type="'.$type.'" class="dialog_input" NAME="'.$key.'" id="'.$key.'" TYPE="text"></td></tr>';
             	//$x++;
             	$type="";
 			}
             
-		}  
+		}
     }   
-    $temp = $temp . $extra_field;   
+    $temp = $temp . $extra_field;
+    $temp .= "</table>";
     $temp = $temp . '
         </fieldset>
     </form>
@@ -412,15 +414,15 @@ function select_option2($form,$size,$nolabel)
     //$is_whereadd = explode("=",$html_content);
     //echo $is_whereadd[0];
     if(!$nolabel)
-        $label ='<label for="label_' .$html_id. '" class="dialog_label">' .$html_txt. ' : </label>';
+        $label ='<tr><td><label for="label_' .$html_id. '" class="dialog_label">' .$html_txt. ' : </label></td>';
     
     $temp = '
 
     '.$label.'
-    <select class="dialog_select" id="'.$html_id.'" name="'.$html_id.'">'; 
+    <td><select class="dialog_select" id="'.$html_id.'" name="'.$html_id.'">'; 
         if($table=="")$temp = $temp . getOptionValueByIDmanual2(explode("&",$html_content),$nozero);
         else $temp = $temp . getOptionValueByID2($table,$html_content,$custom_field_name); 
-    $temp = $temp . '</select>
+    $temp = $temp . '</select></td></tr>
     ';
     return $temp;
     //return $html_id;//<select id="'.$html_id.'" name="'.$html_id.'" style="width:200px">'; getOptionValueByIDmanual(explode("+",$html_content)); echo '</select></span>
